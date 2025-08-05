@@ -19,6 +19,7 @@ def fetch_mge_data(output_file):
                 "completion_status": game.get("status"),
                 "date": game.get("createdAt"),
                 "event_name": "MGE",
+                "review": game.get("review", ""),
             }
             game_data.append(game_info)
 

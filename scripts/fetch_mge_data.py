@@ -73,4 +73,4 @@ def fetch_data(output_file):
 
 
 if __name__ == "__main__":
-    fetch_data("data/mge_game_data.json")
+    fetch_data("events_data/mge_game_data.json")

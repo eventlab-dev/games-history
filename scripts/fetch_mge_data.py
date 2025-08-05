@@ -69,7 +69,7 @@ def fetch_data(output_file):
             game_data.append(asdict(game_info))
 
     with open(output_file, "w", encoding="utf-8") as file:
-        json.dump({"games": game_data}, file, ensure_ascii=False, indent=4)
+        json.dump({"games": game_data}, file, ensure_ascii=False, indent=2)
 
 
 if __name__ == "__main__":

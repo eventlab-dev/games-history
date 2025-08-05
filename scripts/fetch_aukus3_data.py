@@ -3,7 +3,7 @@ import json
 import requests
 from datetime import datetime
 
-from scripts.models import Game
+from .models import CompletionStatus, Game
 
 MOVES_URL = "https://aukus-frontend.onrender.com/api/moves.json"
 PLAYERS_URL = "https://aukus-frontend.onrender.com/api/players.json"
@@ -32,6 +32,14 @@ def transform_date_format(
     return transformed_date_string
 
 
+StatusesMap: dict[str, CompletionStatus] = {
+    "drop": "drop",
+    "completed": "completed",
+    "reroll": "reroll",
+    "sheikh": "drop",
+}
+
+
 def fetch_data(output_file):
     moves_data = requests.get(MOVES_URL).json()
     players_data = requests.get(PLAYERS_URL).json()
@@ -41,7 +49,7 @@ def fetch_data(output_file):
     game_data = []
     for move in moves_data.get("moves", []):
         player = players_by_id.get(move.get("player_id"), {})
-        if move.get("type") in ["movie", "sheikh"]:
+        if move.get("type") in ["movie"]:
             continue
 
         game_info = Game(
@@ -49,7 +57,7 @@ def fetch_data(output_file):
             game_title=move["item_title"],
             game_cover=move["item_image"],
             game_link="",
-            completion_status=move["type"],
+            completion_status=StatusesMap[move["type"]],
             date=transform_date_format(
                 move["created_at"],
             ),
@@ -61,7 +69,7 @@ def fetch_data(output_file):
         game_data.append(asdict(game_info))
 
     with open(output_file, "w", encoding="utf-8") as file:
-        json.dump({"games": game_data}, file, ensure_ascii=False, indent=4)
+        json.dump({"games": game_data}, file, ensure_ascii=False, indent=2)
 
 
 if __name__ == "__main__":

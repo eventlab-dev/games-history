@@ -64,7 +64,7 @@ def fetch_data(output_file):
                 event_name="MGE",
                 review=game.get("review", ""),
                 game_time=game_time,
-                rating=-1,
+                rating="",
             )
             game_data.append(asdict(game_info))
 

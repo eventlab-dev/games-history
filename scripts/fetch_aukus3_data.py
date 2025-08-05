@@ -52,6 +52,12 @@ def fetch_data(output_file):
         if move.get("type") in ["movie"]:
             continue
 
+        rating = move.get("item_rating", "")
+        if rating != "":
+            if int(rating) == rating:
+                rating = int(rating)
+            rating = f"{rating}/10"
+
         game_info = Game(
             player_nickname=player["name"].lower(),
             game_title=move["item_title"],
@@ -64,7 +70,7 @@ def fetch_data(output_file):
             event_name="Aukus3",
             review=move.get("item_review", ""),
             game_time=int(move.get("stream_title_category_duration", 0)),
-            rating=move.get("item_rating", -1),
+            rating=rating,
         )
         game_data.append(asdict(game_info))
 

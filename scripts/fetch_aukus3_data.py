@@ -79,4 +79,4 @@ def fetch_data(output_file):
 
 
 if __name__ == "__main__":
-    fetch_data("data/aukus_game_data.json")
+    fetch_data("data/aukus3.json")

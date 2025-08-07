@@ -11,6 +11,7 @@ def join_events(output_file):
     """
 
     events_data = []
+    statuses = {"drop", "reroll", "completed"}
 
     for filename in os.listdir("events_data"):
         if filename.endswith(".json"):
@@ -18,7 +19,11 @@ def join_events(output_file):
                 os.path.join("events_data", filename), "r", encoding="utf-8"
             ) as file:
                 data = json.load(file)
-                events_data.extend(data.get("games", []))
+                data_games = data.get("games", [])
+                filtered_games = [
+                    game for game in data_games if game["completion_status"] in statuses
+                ]
+                events_data.extend(filtered_games)
 
     with open(output_file, "w", encoding="utf-8") as file:
         json.dump({"games": events_data}, file, ensure_ascii=False, indent=2)

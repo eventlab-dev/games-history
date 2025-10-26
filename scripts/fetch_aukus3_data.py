@@ -67,7 +67,7 @@ def fetch_data(output_file):
             date=transform_date_format(
                 move["created_at"],
             ),
-            event_name="Aukus3",
+            event_name="aukus3",
             review=move.get("item_review", ""),
             game_time=int(move.get("stream_title_category_duration", 0)),
             rating=rating,

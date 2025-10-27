@@ -13,7 +13,7 @@ class Game:
     game_link: str
     completion_status: CompletionStatus
     date: str
-    event_name: Literal["MGE", "Aukus3", "Aukus2", "Aukus1"]
+    event_name: Literal["MGE", "aukus3", "aukus2", "Aukus1"]
     review: str
     rating: str
     game_time: int

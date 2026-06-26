@@ -11,7 +11,7 @@ type PlayersResponse = {
     }
 }
 
-const OUTPUT_FILE = "data/nasral-2025.json";
+const OUTPUT_FILE = "events_data/nasral-2025.json";
 const PLAYERS_URL = "https://nasral.pro/api-mock/player-list.json";
 
 async function fetchPlayers() {

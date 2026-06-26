@@ -1,4 +1,4 @@
-import { type GamesHistory, type Game } from "./types";
+import { type GamesHistory, type HistoryGame } from "./types";
 
 const HistoryData: GamesHistory = await Bun.file("games_history.json").json();
 
@@ -18,7 +18,7 @@ function extractTitleAndYear(title: string): {
   return { title, year: null };
 }
 
-function makeInsertCommand(game: Game) {
+function makeInsertCommand(game: HistoryGame) {
   const timestamp = Math.round(new Date(game.date).getTime() / 1000);
   const { title, year } = extractTitleAndYear(game.game_title);
 

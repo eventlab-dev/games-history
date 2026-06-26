@@ -1,9 +1,9 @@
 
 export type CompletionStatus = "completed" | "reroll" | "drop";
 
-export type EventName = "MGE" | "aukus3" | "aukus2" | "aukus1" | "nassal-2026" | "igropolius-2025";
+export type EventName = "MGE" | "aukus3" | "aukus2" | "aukus1" | "nasral-2025" | "nassal-2026" | "igropolius-2025";
 
-export type Game = {
+export type HistoryGame = {
   player_nickname: string;
   game_title: string;
   game_cover: string;
@@ -20,5 +20,5 @@ export type Game = {
 }
 
 export type GamesHistory = {
-  games: Game[];
+  games: HistoryGame[];
 }

@@ -1,4 +1,4 @@
-import type { Game, GamesHistory } from "./types";
+import type { HistoryGame, GamesHistory } from "./types";
 
 type IgropoliusGame = {
     status: "completed" | "reroll" | "drop";
@@ -24,7 +24,7 @@ const PLAYERS_URL = 'https://igropolius.eventlab.dev/api/players';
 
 const OUTPUT_FILE = 'events_data/igropolius-2025.json';
 
-function igropoliusGameToGame(game: IgropoliusGame, playerName: string): Game {
+function igropoliusGameToGame(game: IgropoliusGame, playerName: string): HistoryGame {
     return {
         player_nickname: playerName.toLowerCase(),
         game_title: game.title,
@@ -45,7 +45,7 @@ function igropoliusGameToGame(game: IgropoliusGame, playerName: string): Game {
 async function fetch_players() {
     const response = await fetch(PLAYERS_URL);
     const data = await response.json() as PlayersResponse;
-    const games: Game[] = [];
+    const games: HistoryGame[] = [];
     for (const player of data.players) {
         for (const game of player.games) {
             games.push(igropoliusGameToGame(game, player.username));

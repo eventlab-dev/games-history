@@ -1,9 +1,9 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import type { CompletionStatus, Game, GamesHistory } from "./types";
+import type { CompletionStatus, HistoryGame, GamesHistory } from "./types";
 
 export async function joinEventsData(outputFile: string): Promise<void> {
-	const eventsData: Game[] = [];
+	const eventsData: HistoryGame[] = [];
 	const statuses = new Set<CompletionStatus>(["drop", "reroll", "completed"]);
 
 	const files = await readdir("events_data");

@@ -1,4 +1,4 @@
-import type { CompletionStatus, Game, GamesHistory } from "./types";
+import type { CompletionStatus, HistoryGame, GamesHistory } from "./types";
 
 type NassalEvent = {
     id: string;
@@ -52,7 +52,7 @@ const statusMap: Record<NassalEvent["status"], CompletionStatus> = {
 	"dropped": "drop",
 };
 
-function nassalEventToGame(event: NassalEvent, playerName: string): Game {
+function nassalEventToGame(event: NassalEvent, playerName: string): HistoryGame {
 	return {
 		player_nickname: playerName.toLowerCase(),
 		game_title: event.title,
@@ -75,7 +75,7 @@ async function process_events() {
 	const response = await fetch(HISTORY_URL);
 	const data = await response.json() as NassalResponse;
 	const playersMap = await fetch_players();
-    const result: Game[] = [];
+    const result: HistoryGame[] = [];
 	for (const [playerId, events] of Object.entries(data)) {
 		const playerName = playersMap.get(playerId);
 		if (!playerName) {

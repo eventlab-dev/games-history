@@ -1,7 +1,7 @@
 
 export type CompletionStatus = "completed" | "reroll" | "drop";
 
-export type EventName = "MGE" | "aukus3" | "aukus2" | "aukus1" | "nassal-2026";
+export type EventName = "MGE" | "aukus3" | "aukus2" | "aukus1" | "nassal-2026" | "igropolius-2025";
 
 export type Game = {
   player_nickname: string;

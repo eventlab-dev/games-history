@@ -21,6 +21,8 @@ type NassalResponse = Record<string, NassalEvent[]>
 const HISTORY_URL = "https://nassal.pro/data/event-snapshot/player-game-histories.json";
 const PLAYERS_URL = 'https://nassal.pro/data/event-snapshot/players.json';
 
+const OUTPUT_FILE = "./events_data/nassal-2026_events.json";	
+
 type Player = {
     player: {
         id: string;
@@ -97,5 +99,5 @@ const data: GamesHistory = {
     games,
 };
 
-const outFile = Bun.file("./events_data/nassal-2026_events.json");
+const outFile = Bun.file(OUTPUT_FILE);
 await outFile.write(JSON.stringify(data, null, 2));

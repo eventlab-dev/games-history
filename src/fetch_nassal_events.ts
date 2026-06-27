@@ -46,14 +46,16 @@ async function fetch_players() {
 	return playersMap;
 }
 
-const statusMap: Record<NassalEvent["status"], CompletionStatus> = {
+const statusMap = {
 	"completed": "completed",
 	"rerolled": "reroll",
-	"dropped": "drop",
-	"playing": "not-finished",
-};
+	"dropped": "drop"
+} as const;
 
-function nassalEventToGame(event: NassalEvent, playerName: string): HistoryGame {
+function nassalEventToGame(event: NassalEvent, playerName: string): HistoryGame | null {
+	if (event.status === "playing") {
+		return null;
+	}
 	return {
 		player_nickname: playerName.toLowerCase(),
 		game_title: event.title,
@@ -88,7 +90,9 @@ async function process_events() {
 				continue;
 			}
 			const game = nassalEventToGame(event, playerName);
-			result.push(game);
+			if (game) {
+				result.push(game);
+			}
 		}
 	}
 	return result;

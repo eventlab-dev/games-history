@@ -23,9 +23,9 @@ async function fetchPlayers() {
 type NasralGame = {
     type: "game" | "movie";
     status: "completed" | "rerolled" | "dropped" | "playing";
-    playerRating: number;
-    playerReview: string | undefined;
-    minutesSpent: number | null;
+    playerRating?: number;
+    playerReview?: string;
+    minutesSpent?: number;
     updatedAt: string;
     metaData: {
         name: string;
@@ -41,14 +41,16 @@ type PlayerEventsResponse = {
     }
 }
 
-const COMPLETION_STATUS_MAP: Record<NasralGame["status"], CompletionStatus> = {
+const COMPLETION_STATUS_MAP = {
     "completed": "completed",
     "rerolled": "reroll",
     "dropped": "drop",
-    "playing": "not-finished",
-}
+} as const;
 
-function transformNasralGame(player: Player, game: NasralGame): HistoryGame {
+function transformNasralGame(player: Player, game: NasralGame): HistoryGame | null {
+    if (game.status === "playing") {
+        return null;
+    }
     const steamId = game.metaData.steamStoreLink ? game.metaData.steamStoreLink.split('/').pop() : null;
     return {
         completion_status: COMPLETION_STATUS_MAP[game.status],
@@ -59,7 +61,7 @@ function transformNasralGame(player: Player, game: NasralGame): HistoryGame {
         date: game.updatedAt,
         event_name: "nasral-2025",
         review: game.playerReview ?? "",
-        rating: `${game.playerRating}/10`,
+        rating: game.playerRating ? `${game.playerRating}/10` : "",
         game_time: game.minutesSpent ? game.minutesSpent * 60 : 0,
         igdb_id: null,
         steam_id: steamId ? parseInt(steamId) : null,
@@ -80,11 +82,13 @@ async function processEvents() {
     for (const player of players) {
         const events = await fetchPlayerEvents(player);
         for (const event of events) {
-            if (event.type !== "game") {
+            if (event.type !== "game" || event.status === "playing") {
                 continue;
             }
             const game = transformNasralGame(player, event);
-            result.push(game);
+            if (game) {
+                result.push(game);
+            }
         }
     }
     return result;

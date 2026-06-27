@@ -1,6 +1,6 @@
 import { type } from "arktype";
 
-export const CompletionStatus = type('"completed" | "reroll" | "drop" | "not-finished"');
+export const CompletionStatus = type('"completed" | "reroll" | "drop"');
 export type CompletionStatus = typeof CompletionStatus.infer;
 
 export const EventName = type('"MGE" | "aukus3" | "aukus2" | "aukus1" | "aukus4" | "nasral-2025" | "nassal-2026" | "igropolius-2025"');

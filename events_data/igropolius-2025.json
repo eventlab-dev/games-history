@@ -423,7 +423,7 @@
     {
       "player_nickname": "krabick",
       "game_title": "Border Officer",
-      "game_cover": null,
+      "game_cover": "",
       "game_link": "",
       "completion_status": "completed",
       "date": "2025-08-19T02:26:07.000Z",
@@ -603,7 +603,7 @@
     {
       "player_nickname": "maddyson",
       "game_title": "High On Racing",
-      "game_cover": null,
+      "game_cover": "",
       "game_link": "",
       "completion_status": "reroll",
       "date": "2025-08-23T01:22:47.000Z",
@@ -3423,7 +3423,7 @@
     {
       "player_nickname": "segall",
       "game_title": "Injustice: Gods Among Us",
-      "game_cover": null,
+      "game_cover": "",
       "game_link": "",
       "completion_status": "completed",
       "date": "2025-08-30T20:49:04.000Z",

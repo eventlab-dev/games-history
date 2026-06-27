@@ -22,10 +22,10 @@ async function fetchPlayers() {
 
 type NasralGame = {
     type: "game" | "movie";
-    status: "completed" | "rerolled" | "dropped";
+    status: "completed" | "rerolled" | "dropped" | "playing";
     playerRating: number;
-    playerReview: string;
-    minutesSpent: number;
+    playerReview: string | undefined;
+    minutesSpent: number | null;
     updatedAt: string;
     metaData: {
         name: string;
@@ -45,6 +45,7 @@ const COMPLETION_STATUS_MAP: Record<NasralGame["status"], CompletionStatus> = {
     "completed": "completed",
     "rerolled": "reroll",
     "dropped": "drop",
+    "playing": "not-finished",
 }
 
 function transformNasralGame(player: Player, game: NasralGame): HistoryGame {
@@ -57,9 +58,9 @@ function transformNasralGame(player: Player, game: NasralGame): HistoryGame {
         game_link: game.metaData.steamStoreLink || "",
         date: game.updatedAt,
         event_name: "nasral-2025",
-        review: game.playerReview,
+        review: game.playerReview ?? "",
         rating: `${game.playerRating}/10`,
-        game_time: game.minutesSpent * 60,
+        game_time: game.minutesSpent ? game.minutesSpent * 60 : 0,
         igdb_id: null,
         steam_id: steamId ? parseInt(steamId) : null,
         hltb_id: null,

@@ -3,13 +3,13 @@ import type { CompletionStatus, HistoryGame, GamesHistory } from "./types";
 type NassalEvent = {
     id: string;
     playerId: string;
-    status: "completed" | "rerolled" | "dropped";
-    finalSpentSec: number;
-    playerRating: number;
-    playerReview: string;
+    status: "completed" | "rerolled" | "dropped" | "playing";
+    finalSpentSec: number | null;
+    playerRating: number | null;
+    playerReview: string | null;
     createdAt: string;
     type: "game" | "movie";
-    hltbGameId: string;
+    hltbGameId: number;
     imageUrl: string;
     releaseYear: number;
     steamAppId: number;
@@ -50,6 +50,7 @@ const statusMap: Record<NassalEvent["status"], CompletionStatus> = {
 	"completed": "completed",
 	"rerolled": "reroll",
 	"dropped": "drop",
+	"playing": "not-finished",
 };
 
 function nassalEventToGame(event: NassalEvent, playerName: string): HistoryGame {
@@ -58,12 +59,12 @@ function nassalEventToGame(event: NassalEvent, playerName: string): HistoryGame 
 		game_title: event.title,
 		game_cover: event.imageUrl,
 		game_link: `https://store.steampowered.com/app/${event.steamAppId}`,
-		completion_status: statusMap[event.status],
+		completion_status: event.status ? statusMap[event.status] : 'drop',
 		date: event.createdAt,
 		event_name: "nassal-2026",
-		review: event.playerReview,
-		rating: `${event.playerRating}/10`,
-		game_time: event.finalSpentSec,
+		review: event.playerReview ?? '',
+		rating: event.playerRating ? `${event.playerRating}/10` : '',
+		game_time: event.finalSpentSec ?? 0,
 		igdb_id: null,
 		steam_id: event.steamAppId,
 		hltb_id: event.hltbGameId,

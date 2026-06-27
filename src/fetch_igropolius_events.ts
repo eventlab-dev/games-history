@@ -6,7 +6,7 @@ type IgropoliusGame = {
     rating: number;
     duration: number;
     review: string;
-    cover: string;
+    cover: string | null;
     game_id: number;
     created_at: number;
 }
@@ -28,7 +28,7 @@ function igropoliusGameToGame(game: IgropoliusGame, playerName: string): History
     return {
         player_nickname: playerName.toLowerCase(),
         game_title: game.title,
-        game_cover: game.cover,
+        game_cover: game.cover ?? '',
         game_link: '',
         completion_status: game.status,
         date: new Date(game.created_at * 1000).toISOString(),

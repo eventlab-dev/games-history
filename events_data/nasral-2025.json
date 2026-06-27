@@ -511,14 +511,16 @@
       "hltb_id": null
     },
     {
+      "completion_status": "not-finished",
       "player_nickname": "c_a_k_e",
       "game_title": "FTL: Faster Than Light",
       "game_cover": "https://howlongtobeat.com/games/FTL_Faster_Than_Light_Logo.jpg",
       "game_link": "https://store.steampowered.com/app/212680",
       "date": "2025-12-24T20:46:06.629Z",
       "event_name": "nasral-2025",
+      "review": "",
       "rating": "undefined/10",
-      "game_time": null,
+      "game_time": 0,
       "igdb_id": null,
       "steam_id": 212680,
       "hltb_id": null
@@ -794,14 +796,16 @@
       "hltb_id": null
     },
     {
+      "completion_status": "not-finished",
       "player_nickname": "dunduk",
       "game_title": "Outer Wilds",
       "game_cover": "https://howlongtobeat.com/games/57527_Outer_Wilds.jpg",
       "game_link": "https://store.steampowered.com/app/753640",
       "date": "2025-12-26T15:54:27.148Z",
       "event_name": "nasral-2025",
+      "review": "",
       "rating": "undefined/10",
-      "game_time": null,
+      "game_time": 0,
       "igdb_id": null,
       "steam_id": 753640,
       "hltb_id": null
@@ -1857,6 +1861,7 @@
       "hltb_id": null
     },
     {
+      "completion_status": "not-finished",
       "player_nickname": "maddyson",
       "game_title": "Command & Conquer: Red Alert 3",
       "game_cover": "https://howlongtobeat.com/games/CnC-RA3-win-cover.jpg",
@@ -1865,7 +1870,7 @@
       "event_name": "nasral-2025",
       "review": "",
       "rating": "undefined/10",
-      "game_time": null,
+      "game_time": 0,
       "igdb_id": null,
       "steam_id": 17480,
       "hltb_id": null

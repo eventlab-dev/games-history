@@ -11,5 +11,8 @@
   },
   "scripts": {
     "to_sql": "bun src/history_to_sql.ts"
+  },
+  "dependencies": {
+    "arktype": "^2.2.1"
   }
 }

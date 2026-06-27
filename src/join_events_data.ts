@@ -1,6 +1,7 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import type { CompletionStatus, HistoryGame, GamesHistory } from "./types";
+import { type CompletionStatus, type HistoryGame, GamesHistory } from "./types";
+import { type as arktype } from "arktype";
 
 export async function joinEventsData(outputFile: string): Promise<void> {
 	const eventsData: HistoryGame[] = [];
@@ -14,9 +15,19 @@ export async function joinEventsData(outputFile: string): Promise<void> {
 			continue;
 		}
 
-		const data = (await Bun.file(join("events_data", filename)).json()) as GamesHistory;
+		console.log(`Processing ${filename}`);
 
-		const filteredGames = (data.games ?? []).filter((game) =>
+		const data = await Bun.file(join("events_data", filename)).json();
+		const parsedData = GamesHistory(data);
+
+		if (parsedData instanceof arktype.errors) {
+			console.error(
+				`Error parsing ${filename}: ${parsedData.summary}, ${parsedData.issues}`,
+			);
+			continue;
+		}
+
+		const filteredGames = (parsedData.games ?? []).filter((game) =>
 			statuses.has(game.completion_status),
 		);
 

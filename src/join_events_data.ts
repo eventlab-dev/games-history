@@ -3,7 +3,9 @@ import { join } from "node:path";
 import { type CompletionStatus, type HistoryGame, GamesHistory } from "./types";
 import { type as arktype } from "arktype";
 
-export async function joinEventsData(outputFile: string): Promise<void> {
+const SCHEMA_FILE = "games_history_schema.json";
+
+async function joinEventsData(outputFile: string): Promise<void> {
 	const eventsData: HistoryGame[] = [];
 	const statuses = new Set<CompletionStatus>(["drop", "reroll", "completed"]);
 
@@ -36,8 +38,21 @@ export async function joinEventsData(outputFile: string): Promise<void> {
 
 	await Bun.write(
 		outputFile,
-		JSON.stringify({ games: eventsData }, null, 2),
+		JSON.stringify(
+			{
+				"$schema": `https://raw.githubusercontent.com/eventlab-dev/games-history/refs/heads/main/${SCHEMA_FILE}`,
+				games: eventsData,
+			},
+			null,
+			2,
+		),
 	);
 }
 
+async function genSchemaFile() {
+	const schema = GamesHistory.toJsonSchema();
+	await Bun.write(SCHEMA_FILE, JSON.stringify(schema, null, 2));
+}
+
 await joinEventsData("games_history.json");
+await genSchemaFile();

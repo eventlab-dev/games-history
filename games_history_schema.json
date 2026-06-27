@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "games": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "completion_status": {
+            "enum": [
+              "completed",
+              "drop",
+              "reroll"
+            ]
+          },
+          "date": {
+            "type": "string"
+          },
+          "event_name": {
+            "enum": [
+              "MGE",
+              "aukus1",
+              "aukus2",
+              "aukus3",
+              "aukus4",
+              "igropolius-2025",
+              "nasral-2025",
+              "nassal-2026"
+            ]
+          },
+          "game_cover": {
+            "type": "string"
+          },
+          "game_link": {
+            "type": "string"
+          },
+          "game_time": {
+            "type": "number"
+          },
+          "game_title": {
+            "type": "string"
+          },
+          "hltb_id": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "igdb_id": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "player_nickname": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "string"
+          },
+          "review": {
+            "type": "string"
+          },
+          "steam_id": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "completion_status",
+          "date",
+          "event_name",
+          "game_cover",
+          "game_link",
+          "game_time",
+          "game_title",
+          "hltb_id",
+          "igdb_id",
+          "player_nickname",
+          "rating",
+          "review",
+          "steam_id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "games"
+  ]
+}

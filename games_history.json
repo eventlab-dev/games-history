@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/eventlab-dev/games-history/refs/heads/main/games_history_schema.json",
   "games": [
     {
       "player_nickname": "segall",
